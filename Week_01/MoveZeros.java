@@ -1,5 +1,8 @@
 package leetcode;
-
+/**
+ * 移动零
+ * leetcode  283  https://leetcode-cn.com/problems/move-zeroes/
+ */
 public class MoveZeros {
 
     public static void main(String[] args) {
