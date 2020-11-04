@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7e7b60cb-5f13-4003-bf93-8d105892e7ec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Week_01/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Week_01/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="userSettingsFile" value="$USER_HOME$/.m2/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1jmbfjqPIGxHkbfRY7TCBZPS71r" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Week_01" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Week_01" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Week_01" />
+      <recent name="$PROJECT_DIR$/Week_01/src" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7e7b60cb-5f13-4003-bf93-8d105892e7ec" name="Default Changelist" comment="" />
+      <created>1604412320174</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604412320174</updated>
+      <workItem from="1604412324924" duration="362000" />
+      <workItem from="1604412705005" duration="29000" />
+      <workItem from="1604413040966" duration="805000" />
+      <workItem from="1604413938515" duration="21000" />
+    </task>
+    <task id="LOCAL-00001" summary="题目添加leetcode链接地址">
+      <created>1604413085010</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1604413085010</updated>
+    </task>
+    <task id="LOCAL-00002" summary="算法题  加一">
+      <created>1604413384425</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1604413384425</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="题目添加leetcode链接地址" />
+    <MESSAGE value="算法题  加一" />
+    <option name="LAST_COMMIT_MESSAGE" value="算法题  加一" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="324" y="233" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604412647051">
+      <screen x="0" y="23" width="1720" height="1097" />
+    </state>
+    <state x="324" y="233" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1720.1097@0.23.1720.1097" timestamp="1604412647051" />
+    <state x="709" y="467" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1604412716245">
+      <screen x="0" y="23" width="1720" height="1097" />
+    </state>
+    <state x="709" y="467" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1720.1097@0.23.1720.1097" timestamp="1604412716245" />
+    <state x="443" y="172" key="CommitChangelistDialog2" timestamp="1604413384291">
+      <screen x="0" y="23" width="1720" height="1097" />
+    </state>
+    <state x="443" y="172" key="CommitChangelistDialog2/0.23.1720.1097@0.23.1720.1097" timestamp="1604413384291" />
+    <state x="172" y="122" key="DiffContextDialog" timestamp="1604413054193">
+      <screen x="0" y="23" width="1720" height="1097" />
+    </state>
+    <state x="172" y="122" key="DiffContextDialog/0.23.1720.1097@0.23.1720.1097" timestamp="1604413054193" />
+    <state x="460" y="300" key="Vcs.Push.Dialog.v2" timestamp="1604413386352">
+      <screen x="0" y="23" width="1720" height="1097" />
+    </state>
+    <state x="460" y="300" key="Vcs.Push.Dialog.v2/0.23.1720.1097@0.23.1720.1097" timestamp="1604413386352" />
+    <state x="537" y="404" key="com.intellij.ide.util.TipDialog" timestamp="1604412323983">
+      <screen x="0" y="23" width="1720" height="1097" />
+    </state>
+    <state x="537" y="404" key="com.intellij.ide.util.TipDialog/0.23.1720.1097@0.23.1720.1097" timestamp="1604412323983" />
+  </component>
+</project>
