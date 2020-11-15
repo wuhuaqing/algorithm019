@@ -260,3 +260,325 @@ public int[] twoSum00(int[] nums, int target) {
     return positionNum;
 }
 ```
+
+#### 二叉树/二叉搜索树
+
+链表/数组是一维结构，树是二维结构；链表是特殊的树（只有左子树或者只有右子树时，树就退化为链表）；树是特殊的图（没有环的图可以看成是树）。
+
+##### 二叉树的遍历
+
+原则：根节点的遍历先后顺序分为 （**左右是指左右子树，而不单单是左右节点**）
+
+前序遍历：根节点 -- 左子树  -- 右子树
+
+中序遍历： 左子树-- 根节点  -- 右子树
+
+后序遍历：左子树  -- 右子树 -- 根节点
+
+常用的思路：使用递归
+
+我的理解：对树的增删改查操作，都涉及到树的遍历，而树的结构特点，基本就是根据某个节点（根节点）来遍历左子树或者右子树，这样重复性的操作，比较适合递归操作来完成。
+
+##### 记忆点
+
+**二叉树/N叉树的 前序遍历/中序遍历/后序遍历 都是深度优先搜索的遍历：在算法中常常使用Stack(栈) + LinkedList(双端队列)作为辅助容器存储节点 来进行遍历操作**
+
+**二叉树/N叉树的 层序遍历 都是广度优先搜索的遍历：在算法中常使用队列（queue）作为辅助容器存储节点来进行遍历**
+
+
+
+##### 二叉搜索树
+
+二叉搜索树是一棵有序的树，通常都是左节点小于根节点，根节点小于有节点。
+
+好的直观操作网站：https://visualgo.net/zh/bst
+
+各类数据结构复杂度陈列：https://www.bigocheatsheet.com/
+
+
+
+#### 算法题解
+
+##### [94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+
+二叉树的遍历通常都是使用递归操作
+
+```java
+/**
+ * 中序遍历的要求是：根在中间 遍历顺序是：左子树 -  根节点 —— 右子树
+ */
+
+public List<Integer> inorderTraversal(TreeNode root) {
+    if (root == null) {
+        return new ArrayList();
+    }
+    List<Integer> list = new ArrayList<>();
+
+    if (root != null) {
+        reverNode(root.left, list);
+        list.add(root.val);
+        reverNode(root.right, list);
+    }
+
+    return list;
+
+}
+
+public void reverNode(TreeNode root, List<Integer> list) {
+    if (root != null) {
+        reverNode(root.left, list);
+        list.add(root.val);
+        reverNode(root.right, list);
+    }
+}
+```
+
+
+
+##### [144. 二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)
+
+```java
+/**
+ * 前序遍历的要求是：根在前面 遍历顺序是： 根节点 -  左子树  —— 右子树
+ */
+
+public List<Integer> preorderTraversal(TreeNode root) {
+    if (root == null) {
+        return new ArrayList();
+    }
+    List<Integer> list = new ArrayList<>();
+
+    if (root != null) {
+        list.add(root.val);
+        reverNode(root.left, list);
+        reverNode(root.right, list);
+    }
+
+    return list;
+
+}
+
+public void reverNode(TreeNode root, List<Integer> list) {
+    if (root != null) {
+        list.add(root.val);
+        reverNode(root.left, list);
+        reverNode(root.right, list);
+    }
+}
+```
+
+##### [102. 二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+
+[好的题解]( https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/solution/er-cha-shu-ceng-xu-bian-li-deng-chang-wo-yao-da-3/)
+
+```java
+/**
+ * 层序遍历 使用队列（先进先出的特性，且删除操作为O(1)）作为辅助容器，帮助数据分层
+ * @param root
+ * @return
+ */
+public List<List<Integer>> levelOrder(TreeNode root) {
+    List<List<Integer>> lists = new ArrayList<>();
+    if (root == null) {
+        return lists;
+    }
+    Queue<TreeNode> queue = new LinkedList<>();
+    queue.add(root);
+    while (!queue.isEmpty()){
+        int size = queue.size();
+        List<Integer> subList = new ArrayList<>();
+        for (int index = 0; index < size; index++) {
+            TreeNode node = queue.poll();
+            if(node!=null){
+                subList.add(node.val);
+                //加入队列的节点不为空
+                if(node.left!=null){
+                    queue.add(node.left);
+                }if(node.right!=null){
+                    queue.add(node.right);
+                }
+            }
+        }
+        lists.add(subList);
+    }
+
+    return lists;
+}
+```
+
+##### [429. N叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)
+
+（广度优先）层序遍历常使用队列做辅助遍历
+
+```java
+/**
+ * 层序遍历 使用队列（先进先出的特性，且删除操作为O(1)）作为辅助容器，帮助数据分层
+ * @param root
+ * @return
+ */
+public List<List<Integer>> levelOrder(Node root) {
+    List<List<Integer>> lists = new ArrayList<>();
+    if (root == null) {
+        return lists;
+    }
+    //队列
+    Queue<Node> queue = new LinkedList();
+    queue.add(root);
+    while (!queue.isEmpty()) {
+
+        int size = queue.size();
+        List<Integer> subList = new ArrayList<>();
+        //使用size，提前固定大小， 循环里加入数据也不会影响循环次数，如果用queue.size(),则会影响分层
+        for (int index = 0; index < size; index++) {
+            // poll 队列头部没数据返回空，queue.remove(); 队列头部没数据抛异常
+            Node node = queue.poll();
+            subList.add(node.val);
+            //队列中加入当前节点的全部子节点
+            queue.addAll(node.children);
+        }
+
+        lists.add(subList);
+
+    }
+
+    return lists;
+}
+```
+
+##### [589. N叉树的前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/)
+
+ （深度优先）深度遍历常使用栈做辅助容器
+
+```java
+/**
+ * 栈 + 链表列表 配合使用
+ * @param root
+ * @return
+ */
+public List<Integer> preorder(Node root) {
+
+    LinkedList<Integer> linkedList = new LinkedList<>();
+    if(root == null){
+         return linkedList ;
+    }
+    Stack<Node> stack = new Stack<>();
+    stack.push(root);
+    while (!stack.isEmpty()){
+        Node pop = stack.pop();
+        linkedList.add(pop.val);
+        if(pop.children!=null){
+            //从后往前遍历
+            for (int j = pop.children.size()-1;j>=0;j--) {
+                Node item =  pop.children.get(j);
+                if(item!=null){
+                    stack.push(item);
+                }
+            }
+
+        }
+    }
+
+    return linkedList;
+
+}
+```
+
+递归方式
+
+```java
+/**
+ * 递归求解N叉树前序遍历
+ *
+ * @param root
+ * @return
+ */
+public List<Integer> preorder00(Node root) {
+
+    if (root == null) {
+        return new ArrayList<>();
+    }
+    List<Integer> list = new ArrayList<>();
+    list.add(root.val);
+    for (int index = 0; index < root.children.size(); index++) {
+        reverNode(root.children.get(index), list);
+    }
+    return list;
+
+}
+
+private void reverNode(Node root, List<Integer> list) {
+    if (root != null) {
+        list.add(root.val);
+        for (int i = 0; i < root.children.size(); i++) {
+            reverNode(root.children.get(i), list);
+        }
+    }
+}
+```
+
+##### [590. N叉树的后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/)
+
+```java
+/**
+ * 使用栈先入后出的特性 + linkedlist 头插法  配合得到N叉树后序遍历值
+ * @param root
+ * @return
+ */
+public List<Integer> postorder(Node root) {
+
+    LinkedList<Integer> list = new LinkedList<>();
+    if (root == null) {
+        return list;
+    }
+    Stack<Node> stack = new Stack<>();
+    stack.push(root);
+    while (!stack.isEmpty()){
+        Node pop = stack.pop();
+        //头插法，后面的元素排第一位
+        list.addFirst(pop.val);
+        if(pop.children!=null){
+            for (Node item :   pop.children) {
+                if(item!=null){
+                    stack.push(item);
+                }
+            }
+        }
+    }
+    return  list;
+
+}
+```
+
+ 递归完成N叉树的后序遍历
+
+```java
+/**
+ * 递归完成N叉树 的后序遍历
+ *
+ * @param root
+ * @return
+ */
+public List<Integer> postorder02(Node root) {
+    List<Integer> list = new ArrayList<>();
+    if (root == null) {
+        return list;
+    }
+    for (int index = 0; index < root.children.size(); index++) {
+        reverNode(root.children.get(index), list);
+    }
+    list.add(root.val);
+
+    return list;
+}
+
+
+private void reverNode(Node node, List<Integer> list) {
+    if (node != null) {
+        for (int index = 0; index < node.children.size(); index++) {
+            reverNode(node.children.get(index), list);
+        }
+        list.add(node.val);
+    }
+
+}
+```
