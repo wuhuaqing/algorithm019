@@ -265,6 +265,10 @@ public int[] twoSum00(int[] nums, int target) {
 
 链表/数组是一维结构，树是二维结构；链表是特殊的树（只有左子树或者只有右子树时，树就退化为链表）；树是特殊的图（没有环的图可以看成是树）。
 
+好的直观操作网站：https://visualgo.net/zh/bst
+
+各类数据结构复杂度陈列：https://www.bigocheatsheet.com/
+
 ##### 二叉树的遍历
 
 原则：根节点的遍历先后顺序分为 （**左右是指左右子树，而不单单是左右节点**）
@@ -285,17 +289,25 @@ public int[] twoSum00(int[] nums, int target) {
 
 **二叉树/N叉树的 层序遍历 都是广度优先搜索的遍历：在算法中常使用队列（queue）作为辅助容器存储节点来进行遍历**
 
-
+#### 二叉树的分类
 
 ##### 二叉搜索树
 
-二叉搜索树是一棵有序的树，通常都是左节点小于根节点，根节点小于有节点。
+二叉搜索树是一棵有序的树，通常都是左节点小于根节点，根节点小于右节点。
 
-好的直观操作网站：https://visualgo.net/zh/bst
+##### 满二叉树
 
-各类数据结构复杂度陈列：https://www.bigocheatsheet.com/
+一棵二叉树中，除了叶子节点外，其他节点都有左右子节点的树且叶子节点在树的最底下两层，叫做满二叉树。
 
+<img src="/Users/wuhuaqing/Library/Application Support/typora-user-images/image-20201117101615742.png" alt="image-20201117101615742" style="zoom:50%;" />
 
+##### 完全二叉树
+
+一棵二叉树中， 叶子节点都在最底下两层， 最后一层的叶子节点都靠左排列且其他层的节点个数要达到最大。
+
+[完全二叉树是最适合用数组来存储的二叉树，最不浪费数组空间。](https://time.geekbang.org/column/article/67856)
+
+<img src="/Users/wuhuaqing/Library/Application Support/typora-user-images/image-20201117102140934.png" alt="image-20201117102140934" style="zoom:33%;" />
 
 #### 算法题解
 
@@ -580,5 +592,174 @@ private void reverNode(Node node, List<Integer> list) {
         list.add(node.val);
     }
 
+}
+```
+
+
+
+#### 堆
+
+[学习视频](https://u.geekbang.org/lesson/36?article=259251&utm_source=time_web&utm_medium=menu&utm_term=timewebmenu)
+
+[结构实现](https://shimo.im/docs/Lw86vJzOGOMpWZz2/read)
+
+定义：可以快速找到一堆数据中的最大值或者最小值。常见的数据结构有二叉堆与斐波拉契堆。
+
+其中根节点为最大值的叫大顶堆或者叫大根堆，根节点为最小值的叫小顶堆或者叫小根堆。
+
+##### 二叉堆
+
+使用二叉完全树做数据结构的堆，任一节点的值大于等于左右子节点的值。因为是使用完全二叉树的缘故，因此，可以使用数组的形式来实现二叉堆。
+
+大顶堆（二叉堆）:大顶堆指的是当前堆顶的元素是整个堆中最大的元素。
+
+小顶堆：指的是当前堆顶的元素是整个堆中最小的元素。
+
+Java中的PriorityQueue（优先队列）就是堆的实现，不过它的底层实现有多种堆实现，不一定只有二叉堆。
+
+<img src="/Users/wuhuaqing/Library/Application Support/typora-user-images/image-20201117104243191.png" alt="image-20201117104243191" style="zoom:50%;" />
+
+#### 算法题解
+
+##### [剑指 Offer 40. 最小的k个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/)
+
+使用大顶堆，如果堆顶的元素大于数组的值，则将堆顶元素弹出，将小值放入堆中，小值进入堆中后，会进行一次排序，最终堆顶的元素是最大值，一次次比较后，留在堆中的元素就是整个数组中最小的k个数。
+
+```java
+/**
+ * 使用堆来处理 java中的最有数据结构是 PriorityQueue 优先队列
+ * @param arr
+ * @param k
+ * @return
+ */
+public int[] getLeastNumbers(int[] arr, int k) {
+    if(k== 0 || arr.length == 0 ){
+        return new int[0];
+    }
+
+     Queue<Integer> heap = new PriorityQueue<>(new Comparator<Integer>() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o2-o1;
+        }
+    });
+    //
+    for (int index = 0; index < arr.length; index++) {
+        int item =  arr[index];
+        if(heap.size()<k){
+            heap.offer(item);
+        }else if(heap.peek()>item){
+            heap.poll();
+            heap.offer(item);
+        }
+    }
+    int[] newArr =  new int[heap.size()];
+    for (int index = 0; index < newArr.length; index++) {
+        newArr[index  ] = heap.poll();
+    }
+
+    return newArr;
+}
+```
+
+##### [239. 滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)
+
+```java
+/**
+ * 虽然超出时间限制，但是最好理解
+ *  使用堆来处理
+ * @param nums
+ * @param k
+ * @return
+ */
+public int[] maxSlidingWindow(int[] nums, int k) {
+    if (nums == null || k <= 0) {
+        return new int[0];
+    }
+    //k大于数组长度，无法构建窗口
+    if (k > nums.length) {
+        return new int[0];
+    }
+    //PriorityQueue 默认是小顶堆，这里使用大顶堆，需要给定一个比较器
+    PriorityQueue<Integer> heap = new PriorityQueue<>(new Comparator<Integer>() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o2 - o1;
+        }
+    });
+
+    int subCount = nums.length - k + 1;
+    int[] result = new int[subCount];
+    for (int index = 0; index < nums.length; index++) {
+
+        int start = index - k;
+        //将已不再窗口中的元素移出堆
+        if (start >= 0) {
+            heap.remove(nums[start]);
+        }
+        //将最新的值加入堆中
+        heap.offer(nums[index]);
+
+        if (heap.size() == k) {
+            result[index - k + 1] = heap.peek();
+        }
+
+    }
+    return result;
+
+}
+```
+
+##### [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)
+
+
+
+```java
+/**
+ * 使用小顶堆 来得到top k  时间复杂度是 O(n * logk)
+ * @param nums
+ * @param k
+ * @return
+ */
+public int[] topKFrequent(int[] nums, int k) {
+    if(nums.length == 0 || k == 0 ){
+        return new int[0];
+    }
+    // 元素值，元素出现次数
+    HashMap<Integer, Integer> map = new HashMap<>();
+    int[] result = new int[k];
+
+    for (int index = 0; index < nums.length; index++) {
+        map.put(nums[index],map.getOrDefault(nums[index],0) +1);
+    }
+
+    //使用小顶堆，默认堆顶元素为最小值，每次比较堆顶元素，如果比堆顶元素小，不入堆，如果比堆顶元素大，入堆后会加堆里的最小元素放回堆顶
+    //小顶堆中判断数组第二位的大小，数组第二位代表元素出现的次数
+    Queue<int[]> heap =  new PriorityQueue<int[]>(new Comparator<int[]>() {
+        @Override
+        public int compare(int [] o1, int[] o2) {
+            return o1[1] - o2[1];
+        }
+    });
+
+    for (HashMap.Entry entry : map.entrySet()) {
+        int key = (int) entry.getKey();
+        int count = (int) entry.getValue();
+        if(heap.size() == k ){
+            // 如果小于堆顶元素，不入堆;大于堆顶元素，删除堆顶元素，将较大值入堆
+            if(heap.peek()[1] < count ){
+                heap.poll();
+                heap.offer(new int[]{key,count});
+            }
+        }else{
+            heap.offer(new int[]{key,count});
+        }
+    }
+
+    for (int index = 0; index < k; index++) {
+        result[index] = heap.poll()[0];
+    }
+
+    return result;
 }
 ```
