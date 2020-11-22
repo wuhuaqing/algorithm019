@@ -36,7 +36,7 @@
  public void backtrack (int n,int k,int start,Deque<Integer> path,List<List<Integer>> lists){
         //第一步 递归终止条件
         if( path.size() == k ){
-            //收集搜索结构
+            //收集搜索结果
             lists.add(new ArrayList<>(path));
             return;
         }
@@ -58,7 +58,7 @@
 
 ###### [77. 组合](https://leetcode-cn.com/problems/combinations/)
 
-回溯算法，剪枝增效
+回溯算法，剪枝增加效率
 
 [剪枝处理思路](https://leetcode-cn.com/problems/combinations/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-ma-/)
 
