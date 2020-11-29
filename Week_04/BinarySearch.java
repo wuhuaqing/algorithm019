@@ -1,5 +1,8 @@
 package leetcode.week04;
 
+/**
+ * 二分查找模版代码
+ */
 public class BinarySearch {
 
     public static void main(String[] args) {
