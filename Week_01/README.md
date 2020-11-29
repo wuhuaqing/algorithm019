@@ -697,3 +697,50 @@ public ListNode reverseList00(ListNode head) {
 
 }
 ```
+
+#### [92. 反转链表 II](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
+
+```java
+
+    /**
+     * 解题图解  https://leetcode-cn.com/problems/reverse-linked-list-ii/solution/ji-bai-liao-100de-javayong-hu-by-reedfan-6/
+     *
+     * @param head
+     * @param m
+     * @param n
+     * @return
+     */
+public ListNode reverseBetween(ListNode head, int m, int n) {
+
+    //第一步 定义一个先节点，用来指向的是链表的头节点（包括翻转后的节点）
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+    //翻转的前一个节点
+    ListNode nodePre = dummy;
+    //移动到翻转的前一个点
+    for (int i = 1; i < m; i++) {
+        nodePre = nodePre.next;
+    }
+
+    System.out.println("nodePre: " + nodePre.val);
+    //第二步 翻转指定位置的链表
+    ListNode pre = null;
+    //注意翻转起点位置
+    ListNode current = nodePre.next;
+
+    for (int i = 0; i < n - m + 1; i++) {
+        ListNode nextTemp = current.next;
+        current.next = pre;
+        pre = current;
+        current = nextTemp;
+    }
+
+    //第三步 翻转指定链表后，需要重塑链表，避免出现链表断开的情况
+
+    //先指定下下个节点 注意代码顺序
+    nodePre.next.next = current;
+    nodePre.next = pre;
+
+    return dummy.next;
+}
+```
